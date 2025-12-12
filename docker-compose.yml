@@ -1,7 +1,9 @@
 services:
     exam-mariadb:
         image: mariadb:10.6.20
-        env_file: .env
+        environment:
+            MYSQL_DATABASE: databases-exam
+            MYSQL_ROOT_PASSWORD: password
         volumes:
             - mariadb_data:/var/lib/mysql
         ports:
@@ -9,7 +11,8 @@ services:
 
     exam-arangodb:
         image: arangodb:latest
-        env_file: .env
+        environment:
+            ARANGO_ROOT_PASSWORD: password
         ports:
             - "8529:8529"
         volumes:
@@ -21,7 +24,9 @@ services:
         image: phpmyadmin/phpmyadmin
         depends_on:
             - exam-mariadb
-        env_file: .env
+        environment:
+            PMA_HOST: exam-mariadb
+            MYSQL_ROOT_PASSWORD: password
         ports:
             - 8080:80
 
