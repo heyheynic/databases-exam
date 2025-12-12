@@ -32,7 +32,7 @@ services:
 
 volumes:
     mariadb_data:
-    arango_data:
+    # arango_data:
 
 networks:
     arango-network:
